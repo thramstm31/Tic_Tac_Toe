@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tic Tac Toe by Tommy Thrams</title>
+
+<style type="text/css">
+td {
+   font-family:"Courier New", Courier, monospace;
+   font-size: 60px;
+   height:100px;
+   width: 100px;
+   text-align:center;
+   cursor:pointer;
+}
+.unselected {
+   /* does nothing */
+}
+.selectedX {
+   color:#000000;
+}
+.selectedO {
+   color:#222222;
+}
+
+.hover {
+   background-color: #FFFFFF;
+   color: #000;
+}
+
+
+</style>
+
+<script type="text/javascript" src="jquery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(restart);
+var position11;
+var position12;
+var position13;
+var position21;
+var position22;
+var position23;
+var position31;
+var position32;
+var position33;
+var currentid;
+var xwon=0;
+var owon=0;
+var turnCount=0;
+
+function restart() {
+myTurn = 1;
+ position11 = null;
+ position12 = null;
+ position13 = null;
+ position21 = null;
+ position22 = null;
+ position23 = null;
+ position31 = null;
+ position32 = null;
+ position33 = null;
+ currentid = null;
+ turnCount=0;
+
+
+ cells = $("#board td");
+$(cells).removeClass("selectedX");
+$(cells).removeClass("selectedO");
+$(cells).addClass("unselected");
+$(cells).html("&nbsp;");
+$(cells).click(selectCell);
+
+//Show total games score
+$("#status").html("X has won: " + xwon + " O has won: " + owon);
+$("#LastWin").html("The winner is: ");
+}
+
+function selectCell(event) {
+    if (myTurn == 1 && $(this).html() != "X" && $(this).html() != "O") {
+      $(this).html("X");
+      $(this).removeClass("unselected");
+      $(this).addClass("selectedX");
+      currentid=(event.target.id);
+      turnCount +=1;
+	  myTurn = 2;
+    }
+
+   if (myTurn == 2 && $(this).html() != "X" && $(this).html() != "O") {
+     	$(this).html("O");
+	    $(this).removeClass("unselected");
+	    $(this).addClass("selectedO");
+	    currentid=(event.target.id);
+	    turnCount +=1;
+      	myTurn = 1;
+   }
+
+	//store the current position
+	if (currentid == '11' ){
+		position11 = $(this).html();
+  	}
+
+  	if (currentid == '12' ){
+		position12 = $(this).html();
+  	}
+
+  	if (currentid == '13' ){
+		position13 = $(this).html();
+  	}
+
+  	if (currentid == '21' ){
+		position21 = $(this).html();
+	}
+
+	if (currentid == '22' ){
+		position22 = $(this).html();
+	}
+
+	if (currentid == '23' ){
+		position23 = $(this).html();
+  	}
+
+  	if (currentid == '31' ){
+		position31 = $(this).html();
+	}
+
+	if (currentid == '32' ){
+		position32 = $(this).html();
+	}
+
+	if (currentid == '33' ){
+		position33 = $(this).html();
+  	}
+
+	//find if the player has won
+    if (position11 == 'X') {
+        if (position12 == 'X'){
+        	if (position13 == 'X'){
+        		$("#LastWin").html("The winner is: "+ position11);
+        		alert("The winner is: "+ position11);
+        		xwon +=1;
+        		position11 = null;
+				 position12 = null;
+				 position13 = null;
+				 position21 = null;
+				 position22 = null;
+				 position23 = null;
+				 position31 = null;
+				 position32 = null;
+ 					position33 = null;
+ 					turnCount=0;
+ 					$("#status").html("X has won: " + xwon + " O has won: " + owon);
+        	}
+        }
+	}
+
+	//find if the player has won
+	    if (position11 == 'O') {
+	        if (position12 == 'O'){
+	        	if (position13 == 'O'){
+	        		$("#LastWin").html("The winner is: "+ position11);
+	        		alert("The winner is: "+ position11);
+	        		owon += 1;
+	        		position11 = null;
+					 position12 = null;
+					 position13 = null;
+					 position21 = null;
+					 position22 = null;
+					 position23 = null;
+					 position31 = null;
+					 position32 = null;
+ 					position33 = null;
+ 					$("#status").html("X has won: " + xwon + " O has won: " + owon);
+ 					turnCount=0;
+	        	}
+	        }
+	}
+
+	//find if the player has won
+    if (position11 == 'X') {
+        if (position21 == 'X'){
+        	if (position31 == 'X'){
+        		$("#LastWin").html("The winner is :"+ position11);
+        		alert("The winner is: "+ position11);
+        		xwon +=1;
+				 position11 = null;
+ 					 position12 = null;
+ 					 position13 = null;
+ 					 position21 = null;
+ 					 position22 = null;
+ 					 position23 = null;
+ 					 position31 = null;
+ 					 position32 = null;
+ 					position33 = null;
+ 					$("#status").html("X has won: " + xwon + " O has won: " + owon);
+ 					turnCount=0;
+ 			}
+        }
+	}
+
+	//find if the player has won
+	    if (position11 == 'O') {
+	        if (position21 == 'O'){
+	        	if (position31 == 'O'){
+	        		$("#LastWin").html("The winner is: "+ position11);
+	        		alert("The winner is: "+ position11);
+	        		owon += 1;
+	        		position11 = null;
+					 position12 = null;
+					 position13 = null;
+					 position21 = null;
+					 position22 = null;
+					 position23 = null;
+					 position31 = null;
+					 position32 = null;
+					 position33 = null;
+					 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+					 turnCount=0;
+	        	}
+	        }
+	}
+
+	//find if the player has won
+    if (position12 == 'X') {
+        if (position22 == 'X'){
+        	if (position32 == 'X'){
+        		$("#LastWin").html("The winner is: "+ position12);
+        		alert("The winner is: "+ position12);
+        		xwon +=1;
+        		position11 = null;
+				 position12 = null;
+				 position13 = null;
+				 position21 = null;
+				 position22 = null;
+				 position23 = null;
+				 position31 = null;
+				 position32 = null;
+				 position33 = null;
+				 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+				 turnCount=0;
+        	}
+        }
+	}
+
+	//find if the player has won
+	    if (position12 == 'O') {
+	        if (position22 == 'O'){
+	        	if (position32 == 'O'){
+	        		$("#LastWin").html("The winner is: "+ position12);
+	        		alert("The winner is: "+ position12);
+	        		owon += 1;
+	        		position11 = null;
+					 position12 = null;
+					 position13 = null;
+					 position21 = null;
+					 position22 = null;
+					 position23 = null;
+					 position31 = null;
+					 position32 = null;
+					 position33 = null;
+					 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+					 turnCount=0;
+	        	}
+	        }
+	}
+
+	//find if the player has won
+    if (position13 == 'X') {
+        if (position23 == 'X'){
+        	if (position33 == 'X'){
+        		$("#LastWin").html("The winner is: "+ position13);
+        		alert("The winner is: "+ position13);
+        		xwon +=1;
+        		position11 = null;
+				 position12 = null;
+				 position13 = null;
+				 position21 = null;
+				 position22 = null;
+				 position23 = null;
+				 position31 = null;
+				 position32 = null;
+ 				position33 = null;
+ 				$("#status").html("X has won: " + xwon + " O has won: " + owon);
+ 				turnCount=0;
+        	}
+        }
+	}
+
+	//find if the player has won
+	    if (position13 == 'O') {
+	        if (position23 == 'O'){
+	        	if (position33 == 'O'){
+	        		$("#LastWin").html("The winner is: "+ position13);
+	        		alert("The winner is: "+ position13);
+	        		owon += 1;
+	        		position11 = null;
+					 position12 = null;
+					 position13 = null;
+					 position21 = null;
+					 position22 = null;
+					 position23 = null;
+					 position31 = null;
+					 position32 = null;
+					 position33 = null;
+					 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+					 turnCount=0;
+	        	}
+	        }
+	}
+
+		//find if the player has won
+	    if (position21 == 'X') {
+	        if (position22 == 'X'){
+	        	if (position23 == 'X'){
+	        		$("#LastWin").html("The winner is: "+ position21);
+	        		alert("The winner is: "+ position21);
+        			xwon +=1;
+        			position11 = null;
+					 position12 = null;
+					 position13 = null;
+					 position21 = null;
+					 position22 = null;
+					 position23 = null;
+					 position31 = null;
+					 position32 = null;
+					 position33 = null;
+					 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+					 turnCount=0;
+	        	}
+	        }
+		}
+
+		//find if the player has won
+		    if (position21 == 'O') {
+		        if (position22 == 'O'){
+		        	if (position23 == 'O'){
+		        		$("#LastWin").html("The winner is: "+ position21);
+		        		alert("The winner is: "+ position21);
+	        			owon += 1;
+	        			position11 = null;
+						 position12 = null;
+						 position13 = null;
+						 position21 = null;
+						 position22 = null;
+						 position23 = null;
+						 position31 = null;
+						 position32 = null;
+						 position33 = null;
+						 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+						 turnCount=0;
+		        	}
+		        }
+		}
+
+		//find if the player has won
+	    if (position31 == 'X') {
+	        if (position32 == 'X'){
+	        	if (position33 == 'X'){
+	        		$("#LastWin").html("The winner is: "+ position31);
+	        		alert("The winner is: "+ position31);
+        			xwon +=1;
+        			position11 = null;
+					 position12 = null;
+					 position13 = null;
+					 position21 = null;
+					 position22 = null;
+					 position23 = null;
+					 position31 = null;
+					 position32 = null;
+					 position33 = null;
+					 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+					 turnCount=0;
+	        	}
+	        }
+		}
+
+		//find if the player has won
+		    if (position31 == 'O') {
+		        if (position32 == 'O'){
+		        	if (position33 == 'O'){
+		        		$("#LastWin").html("The winner is: "+ position31);
+		        		alert("The winner is: "+ position31);
+	        			owon += 1;
+	        			position11 = null;
+						 position12 = null;
+						 position13 = null;
+						 position21 = null;
+						 position22 = null;
+						 position23 = null;
+						 position31 = null;
+						 position32 = null;
+						 position33 = null;
+						 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+						 turnCount=0;
+		        	}
+		        }
+			}
+
+	//find if the player has won
+    if (position11 == 'X') {
+        if (position22 == 'X'){
+        	if (position33 == 'X'){
+        		$("#LastWin").html("The winner is: "+ position11);
+        		alert ("The winner is: "+ position11);
+        		xwon +=1;
+        		position11 = null;
+				 position12 = null;
+				 position13 = null;
+				 position21 = null;
+				 position22 = null;
+				 position23 = null;
+				 position31 = null;
+				 position32 = null;
+					position33 = null;
+					$("#status").html("X has won: " + xwon + " O has won: " + owon);
+					turnCount=0;
+        	}
+        }
+	}
+
+	//find if the player has won
+	    if (position11 == 'O') {
+	        if (position22 == 'O'){
+	        	if (position33 == 'O'){
+	        		$("#LastWin").html("The winner is: "+ position11);
+	        		alert("The winner is: "+ position11);
+	        		owon += 1;
+	        		position11 = null;
+					 position12 = null;
+					 position13 = null;
+					 position21 = null;
+					 position22 = null;
+					 position23 = null;
+					 position31 = null;
+					 position32 = null;
+ 					position33 = null;
+ 					$("#status").html("X has won: " + xwon + " O has won: " + owon);
+ 					turnCount=0;
+	        	}
+	        }
+	}
+
+	//find if the player has won
+    if (position13 == 'X') {
+        if (position22 == 'X'){
+        	if (position31 == 'X'){
+        		$("#LastWin").html("The winner is: "+ position13);
+        		alert ("The winner is: "+ position13);
+        		xwon +=1;
+        		position11 = null;
+				 position12 = null;
+				 position13 = null;
+				 position21 = null;
+				 position22 = null;
+				 position23 = null;
+				 position31 = null;
+				 position32 = null;
+ 				position33 = null;
+ 				$("#status").html("X has won: " + xwon + " O has won: " + owon);
+ 				turnCount=0;
+        	}
+        }
+	}
+
+	//find if the player has won
+	    if (position13 == 'O') {
+	        if (position22 == 'O'){
+	        	if (position31 == 'O'){
+	        		$("#LastWin").html("The winner is: "+ position13);
+	        		alert ("The winner is: "+ position13);
+	        		owon += 1;
+	        		position11 = null;
+					 position12 = null;
+					 position13 = null;
+					 position21 = null;
+					 position22 = null;
+					 position23 = null;
+					 position31 = null;
+					 position32 = null;
+					 position33 = null;
+					 $("#status").html("X has won: " + xwon + " O has won: " + owon);
+					 turnCount=0;
+	        	}
+	        }
+		}
+
+	//find if tie
+	if (turnCount == "9"){
+		alert ("It is a tie");
+		turnCount=0;
+		$(document).ready(restart);
+	}
+}
+
+
+</script>
+
+</head>
+<body bgcolor="#ECD672">
+<center><b><p> Tic Tac Toe</p></b></center>
+<table id="board" class ="board" cellspacing="0" cellpadding="0" align="center">
+   <tr>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';"
+      		style="border-right:2px solid #000000;border-bottom:2px solid #000000;" id="11"></td>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';"
+      		style="border-right:2px solid #000000;border-bottom:2px solid #000000;" id="12"></td>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';"
+      		style="border-bottom:2px solid #000000;" id="13"></td>
+   </tr>
+   <tr>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';"
+      		style="border-right:2px solid #000000;border-bottom:2px solid #000000;" id="21"></td>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';"
+      		style="border-right:2px solid #000000;border-bottom:2px solid #000000;" id="22"></td>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';"
+      		style="border-bottom:2px solid #000000;" id="23"></td>
+   </tr>
+   <tr>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';"
+      		style="border-right:2px solid #000000;" id="31"></td>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';"
+      		style="border-right:2px solid #000000;" id="32"></td>
+      <td onmouseover="this.className = 'hover';" onmouseout="this.className = '';" id="33"></td>
+   </tr>
+</table>
+<div id="status" align="center"></div>
+<div id="LastWin" align="center"></div>
+<center><input type="button" name="restart" value="restart" onclick="restart()"></center>
+</body>
+</html>
